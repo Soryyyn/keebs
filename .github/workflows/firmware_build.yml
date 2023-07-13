@@ -50,5 +50,5 @@ jobs:
       - name: Upload built firmware
         uses: actions/upload-artifact@v3
         with:
-          name: ${{matrix.keyboard}}-firmware
+          name: ${{ steps.split.outputs._1 }}-${{ steps.split.outputs._2}}-${{ steps.split.outputs._4}}-firmware
           path: build
