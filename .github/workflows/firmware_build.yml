@@ -42,7 +42,7 @@ jobs:
           separator: /
           limit: -1
       - name: Build firmware
-        uses: justgook/qmk-build@v1
+        uses: Soryyyn/qmk-build@v1.2
         with:
           keymap-path: "keyboards/planck/rev7/keymaps/soryn"
           keyboard: "${{ steps.split.outputs._1 }}/${{ steps.split.outputs._2}}"
