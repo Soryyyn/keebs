@@ -4,11 +4,11 @@ on:
     branches:
       - master
 
-name: Build firmware for keyboard
+name: Build firmware
 
 jobs:
   changes:
-    name: Detect changes to keyboard
+    name: Detect changes to keyboards
     runs-on: ubuntu-20.04
     permissions:
       pull-requests: read
@@ -25,7 +25,7 @@ jobs:
                 - 'keyboards/planck/rev7/keymaps/soryn/**'
 
   build_firmware:
-    name: Build firmware for ${{matrix.keyboard}}
+    name: ${{matrix.keyboard}}
     needs: changes
     if: ${{needs.changes.outputs.keyboards != '[]' && needs.changes.outputs.keyboards != ''}}
     strategy:
@@ -47,7 +47,7 @@ jobs:
           keymap-path: "keyboards/planck/rev7/keymaps/soryn"
           keyboard: "${{ steps.split.outputs._1 }}/${{ steps.split.outputs._2}}"
           keymap: "${{ steps.split.outputs._4}}"
-      - name: Upload built firmware
+      - name: Upload firmware
         uses: actions/upload-artifact@v3
         with:
           name: ${{ steps.split.outputs._1 }}-${{ steps.split.outputs._2}}-${{ steps.split.outputs._4}}-firmware
