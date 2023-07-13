@@ -1,0 +1,54 @@
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+name: Build firmware for keyboard
+
+jobs:
+  changes:
+    name: Detect changes to keyboard
+    runs-on: ubuntu-20.04
+    permissions:
+      pull-requests: read
+    outputs:
+      keyboards: ${{steps.filter.outputs.changes}}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Detect which keyboard had changes
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            keyboards/planck/rev7/keymaps/soryn:
+                - 'keyboards/planck/rev7/keymaps/soryn/**'
+
+  build_firmware:
+    name: Build firmware for ${{matrix.keyboard}}
+    needs: changes
+    if: ${{needs.changes.outputs.keyboards != '[]' && needs.changes.outputs.keyboards != ''}}
+    strategy:
+      matrix:
+        keyboard: ${{ fromJSON(needs.changes.outputs.keyboards) }}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Split changes keyboard string
+        uses: xom9ikk/split@v1
+        id: split
+        with:
+          string: "${{matrix.keyboard}}"
+          separator: /
+          limit: -1
+      - name: Build firmware
+        uses: justgook/qmk-build@v1
+        with:
+          keymap-path: "keyboards/planck/rev7/keymaps/soryn"
+          keyboard: "${{ steps.split.outputs._1 }}/${{ steps.split.outputs._2}}"
+          keymap: "${{ steps.split.outputs._4}}"
+      - name: Upload built firmware
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{matrix.keyboard}}-firmware
+          path: build
