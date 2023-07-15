@@ -5,7 +5,6 @@
 #include QMK_KEYBOARD_H
 
 enum planck_layers { _QWERTY, _LOWER, _RAISE, _ADJUST };
-
 enum planck_keycodes { QWERTY = SAFE_RANGE, BACKLIT };
 
 #define LOWER MO(_LOWER)
@@ -20,7 +19,7 @@ enum planck_keycodes { QWERTY = SAFE_RANGE, BACKLIT };
  */
 enum {
     TD_CPC = 0
-}
+};
 
 // Switch between copy / paste / cut.
 void copy_paste_cut (qk_tap_dance_state_t *state, void *user_data) {
@@ -36,7 +35,7 @@ void copy_paste_cut (qk_tap_dance_state_t *state, void *user_data) {
 }
 
 tap_dance_action_t tap_dance_actions[] = {
-    [TD_CPC] = ACTION_TAP_DANCE_FN(copy_paste_cut);
+    [TD_CPC] = ACTION_TAP_DANCE_FN(copy_paste_cut),
 }
 
 /* clang-format off */
