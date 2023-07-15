@@ -21,7 +21,6 @@ enum {
     TD_CPC = 0
 };
 
-// Switch between copy / paste / cut.
 void copy_paste_cut (qk_tap_dance_state_t *state, void *user_data) {
     if(state->count == 1) {
         tap_code(C(KC_C));
