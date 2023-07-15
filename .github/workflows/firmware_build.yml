@@ -49,3 +49,4 @@ jobs:
         with:
           name: ${{ steps.split.outputs._1 }}-${{ steps.split.outputs._2}}-${{ steps.split.outputs._4}}-firmware
           path: build
+          if-no-files-found: error
