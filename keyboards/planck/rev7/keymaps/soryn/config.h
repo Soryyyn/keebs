@@ -45,5 +45,5 @@
 /*
    Mousekey settings.
 */
-#define MOUSEKEY_INTERVAL 16
+#define MOUSEKEY_INTERVAL 10
 #define MOUSEKEY_MAX_SPEED 6
