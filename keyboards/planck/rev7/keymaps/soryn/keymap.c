@@ -1,5 +1,5 @@
 /**
- * Soryn layout for the Planck keyboard (inspired by Deft layout) sd ssdfsdfsdf
+ * Soryn layout for the Planck keyboard (inspired by Deft layout)
  */
 
 #include QMK_KEYBOARD_H
