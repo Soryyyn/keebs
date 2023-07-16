@@ -58,3 +58,4 @@ jobs:
           add: "./firmware"
           message: "chore(firmware): Upload newest firmware for ${{matrix.keyboard}}"
           pathspec_error_handling: exitAtEnd
+          default_author: github_actions
