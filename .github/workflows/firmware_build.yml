@@ -51,11 +51,7 @@ jobs:
           keymap: "${{ steps.split.outputs._4}}"
       - name: Move firmware to folder
         run: |
-          ls
-          CURRENT_DATE=$(date +"%m-%d-%y")
-          mkdir -p ./firmware/${{matrix.keyboard}}
-          mkdir -p ./firmware/${{matrix.keyboard}}/$CURRENT_DATE
-          cp ./build/*.hex ./build/*.bin ./firmware/${{matrix.keyboard}}/$CURRENT_DATE
+          cp ./build/*.hex ./build/*.bin ./firmware
       - name: Upload firmware to repo
         uses: EndBug/add-and-commit@v9
         with:
