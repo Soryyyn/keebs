@@ -41,3 +41,8 @@
    - etc.
 */
 // #define MIDI_ADVANCED
+
+/*
+   Enable constant mouse acceleration
+*/
+#define MK_3_SPEED
