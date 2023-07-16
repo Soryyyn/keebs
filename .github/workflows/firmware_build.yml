@@ -34,11 +34,13 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
       - name: Split changes keyboard string
         uses: xom9ikk/split@v1
         id: split
         with:
-          string: "${{matrix.keyboard}}"
+          string: ${{matrix.keyboard}}
           separator: /
           limit: -1
       - name: Build firmware
@@ -47,17 +49,16 @@ jobs:
           keymap-path: "keyboards/planck/rev7/keymaps/soryn"
           keyboard: "${{ steps.split.outputs._1 }}/${{ steps.split.outputs._2}}"
           keymap: "${{ steps.split.outputs._4}}"
-      - name: Upload firmware files to PR
-        uses: gavv/pull-request-artifacts@v1.0.0
+      - name: Move firmware to folder
+        run: |
+          ls
+          CURRENT_DATE=$(date +"%m-%d-%y")
+          mkdir -p ./firmware/${{matrix.keyboard}}
+          mkdir -p ./firmware/${{matrix.keyboard}}/$CURRENT_DATE
+          cp ./build/*.hex ./build/*.bin ./firmware/${{matrix.keyboard}}/$CURRENT_DATE
+      - name: Upload firmware to repo
+        uses: EndBug/add-and-commit@v9
         with:
-          commit: ${{ github.event.pull_request.head.sha }}
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: |
-            build/*.hex
-            build/*.bin
-      # - name: Upload firmware
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: ${{ steps.split.outputs._1 }}-${{ steps.split.outputs._2}}-${{ steps.split.outputs._4}}-firmware
-      #     path: build
-      #     if-no-files-found: error
+          add: "./firmware"
+          message: "chore(firmware): Upload newest firmware for ${{matrix.keyboard}}"
+          pathspec_error_handling: exitAtEnd
