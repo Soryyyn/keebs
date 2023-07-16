@@ -41,3 +41,9 @@
    - etc.
 */
 // #define MIDI_ADVANCED
+
+/*
+   Mousekey settings.
+*/
+#define MOUSEKEY_INTERVAL 16
+#define MOUSEKEY_MAX_SPEED 6
