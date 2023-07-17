@@ -25,14 +25,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |Shift |  Z   |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |  Up  | //?  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl | Alt  | GUI  | COPY |Lower |    Space    |Raise |Enter | Left | Down |Right |
+ * | Ctrl | Alt  | GUI  |CO/PA |Lower |    Space    |Raise |Enter | Left | Down |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_planck_grid(
     QK_GESC,    KC_Q,    KC_W,       KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
      KC_TAB,    KC_A,    KC_S,       KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT,    KC_Z,    KC_X,       KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_UP,   KC_SLSH,
-    KC_LCTL, KC_LALT, KC_LGUI,    C(KC_C),   LOWER,  KC_SPC,  KC_SPC,   RAISE,   KC_ENT, KC_LEFT, KC_DOWN,   KC_RGHT
+    KC_LCTL, KC_LALT, KC_LGUI,      KC_NO,   LOWER,  KC_SPC,  KC_SPC,   RAISE,   KC_ENT, KC_LEFT, KC_DOWN,   KC_RGHT
 ),
 
 /* Lower
@@ -111,24 +111,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* clang-format on */
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    // Change lighting based on current upmost layer.
-    switch (get_highest_layer(state)) {
-        case _RAISE:
-            rgblight_setrgb(26, 255, 210);
-            break;
-        case _LOWER:
-            rgblight_setrgb(210, 26, 255);
-            break;
-        case _FN_KEYS:
-            rgblight_setrgb(26, 255, 218);
-            break;
-        case _ADJUST:
-            rgblight_setrgb(255, 26, 118);
-            break;
-        default: // for any other layers, or the default layer
-            rgblight_setrgb (102, 26, 255);
-            break;
+    return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+}
+
+/*
+    Handle keypresses.
+*/
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        // Single copy/paste key.
+        // Copy on tap / paste on hold.
+        case LT(0, KC_NO):
+            if (record->tap.count && record->event.pressed) {
+                tap_code16(C(KC_C));
+            } else if (record->event.pressed) {
+                tap_code16(C(KC_V));
+            }
+            return false;
     }
 
-    return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+    return true;
 }
