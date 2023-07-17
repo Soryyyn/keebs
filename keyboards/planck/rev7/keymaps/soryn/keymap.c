@@ -1,12 +1,11 @@
 /**
  * Soryn layout for the Planck keyboard (inspired by Deft layout)
  */
-
+#include <print.h>
 #include QMK_KEYBOARD_H
 #include "os_detection.h"
 
-enum planck_layers { _QWERTY, _LOWER, _RAISE, _ADJUST, _FN_KEYS };
-enum planck_keycodes { QWERTY = SAFE_RANGE, BACKLIT };
+enum planck_layers { _BASE, _LOWER, _RAISE, _ADJUST, _FN_KEYS };
 
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
@@ -20,7 +19,7 @@ enum planck_keycodes { QWERTY = SAFE_RANGE, BACKLIT };
 /* clang-format off */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-/* Qwerty
+/* Base
  * ,-----------------------------------------------------------------------------------.
  * | Esc/~|  Q   |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
@@ -31,7 +30,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Ctrl | Alt  | GUI  |CO/PA |Lower |    Space    |Raise |Enter | Left | Down |Right |
  * `-----------------------------------------------------------------------------------'
  */
-[_QWERTY] = LAYOUT_planck_grid(
+[_BASE] = LAYOUT_planck_grid(
     QK_GESC,    KC_Q,    KC_W,       KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
      KC_TAB,    KC_A,    KC_S,       KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT,    KC_Z,    KC_X,       KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_UP,   KC_SLSH,
@@ -130,16 +129,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // Also changes to command + <key> on macos.
         case MT_COPA:
             if (record->tap.count && record->event.pressed) {
-                if(detected_os == OS_MACOS) {
-                    tap_code16(G(KC_C));
-                } else {
-                    tap_code16(C(KC_C));
+                switch (detected_os) {
+                    case OS_MACOS:
+                        print("MACOS");
+                        tap_code16(G(KC_C));
+                        break;
+                    default:
+                        print("OTHER");
+                        tap_code16(C(KC_C));
+                        break;
                 }
             } else if (record->event.pressed) {
-                if(detected_os == OS_MACOS) {
-                    tap_code16(G(KC_V));
-                } else {
-                    tap_code16(C(KC_V));
+                switch (detected_os) {
+                    case OS_MACOS:
+                        print("MACOS");
+                        tap_code16(G(KC_V));
+                        break;
+                    default:
+                        print("OTHER");
+                        tap_code16(C(KC_V));
+                        break;
                 }
             }
             return false;
