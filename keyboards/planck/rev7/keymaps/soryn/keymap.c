@@ -1,7 +1,6 @@
 /**
  * Soryn layout for the Planck keyboard (inspired by Deft layout)
  */
-#include <print.h>
 #include QMK_KEYBOARD_H
 #include "os_detection.h"
 
@@ -131,22 +130,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->tap.count && record->event.pressed) {
                 switch (detected_os) {
                     case OS_MACOS:
-                        print("MACOS");
                         tap_code16(G(KC_C));
                         break;
                     default:
-                        print("OTHER");
                         tap_code16(C(KC_C));
                         break;
                 }
             } else if (record->event.pressed) {
                 switch (detected_os) {
                     case OS_MACOS:
-                        print("MACOS");
                         tap_code16(G(KC_V));
                         break;
                     default:
-                        print("OTHER");
                         tap_code16(C(KC_V));
                         break;
                 }
