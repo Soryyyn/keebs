@@ -47,3 +47,8 @@
 */
 #define MOUSEKEY_INTERVAL 10
 #define MOUSEKEY_MAX_SPEED 4
+
+/*
+   RGB settings.
+*/
+#define RGBLIGHT_SLEEP true

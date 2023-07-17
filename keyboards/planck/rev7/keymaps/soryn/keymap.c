@@ -114,10 +114,13 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     // Change lighting based on current upmost layer.
     switch (get_highest_layer(state)) {
         case _RAISE:
-            rgblight_setrgb(RGB_BLUE);
+            rgblight_setrgb(26, 255, 210);
             break;
         case _LOWER:
-            rgblight_setrgb(RGB_RED);
+            rgblight_setrgb(210, 26, 255);
+            break;
+        case _FN_KEYS:
+            rgblight_setrgb(26, 210, 255);
             break;
         default: // for any other layers, or the default layer
             rgblight_setrgb (102, 26, 255);
