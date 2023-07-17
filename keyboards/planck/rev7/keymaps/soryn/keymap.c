@@ -3,6 +3,7 @@
  */
 
 #include QMK_KEYBOARD_H
+#include "os_detection.h"
 
 enum planck_layers { _QWERTY, _LOWER, _RAISE, _ADJUST, _FN_KEYS };
 enum planck_keycodes { QWERTY = SAFE_RANGE, BACKLIT };
@@ -120,14 +121,26 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     Handle keypresses.
 */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    os_variant_t detected_os = detected_host_os();
+
     switch (keycode) {
         // Single copy/paste key.
         // Copy on tap / paste on hold.
+        //
+        // Also changes to command + <key> on macos.
         case MT_COPA:
             if (record->tap.count && record->event.pressed) {
-                tap_code16(C(KC_C));
+                if(detected_os == OS_MACOS) {
+                    tap_code16(G(KC_C));
+                } else {
+                    tap_code16(C(KC_C));
+                }
             } else if (record->event.pressed) {
-                tap_code16(C(KC_V));
+                if(detected_os == OS_MACOS) {
+                    tap_code16(G(KC_V));
+                } else {
+                    tap_code16(C(KC_V));
+                }
             }
             return false;
     }
