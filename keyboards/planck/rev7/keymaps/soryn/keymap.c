@@ -120,7 +120,10 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             rgblight_setrgb(210, 26, 255);
             break;
         case _FN_KEYS:
-            rgblight_setrgb(26, 210, 255);
+            rgblight_setrgb(26, 255, 218);
+            break;
+        case _ADJUST:
+            rgblight_setrgb(255, 26, 118);
             break;
         default: // for any other layers, or the default layer
             rgblight_setrgb (102, 26, 255);
