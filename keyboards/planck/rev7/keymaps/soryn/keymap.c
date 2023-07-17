@@ -111,5 +111,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* clang-format on */
 
 layer_state_t layer_state_set_user(layer_state_t state) {
+    // Change lighting based on current upmost layer.
+    switch (get_highest_layer(state)) {
+        case _RAISE:
+            rgblight_setrgb(RGB_BLUE);
+            break;
+        case _LOWER:
+            rgblight_setrgb(RGB_RED);
+            break;
+        default: // for any other layers, or the default layer
+            rgblight_setrgb (102, 26, 255);
+            break;
+    }
+
     return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
