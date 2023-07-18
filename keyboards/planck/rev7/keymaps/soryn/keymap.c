@@ -56,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Raise
  * ,-----------------------------------------------------------------------------------.
- * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  | F10  | F11  | F12  |
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
@@ -66,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT_planck_grid(
-      KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0, _______,
     _______,  UML_AE,  UML_OE,  UML_UE, _______, _______, _______, _______, _______, _______, KC_VOLU, KC_MPLY,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_MPLY, KC_VOLD, KC_MNXT
@@ -115,13 +115,14 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
 
-/*
-    Handle keypresses.
-*/
+//
+// Handle keypresses.
+//
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     os_variant_t detected_os = detected_host_os();
 
     switch (keycode) {
+
         // Single copy/paste key.
         // Copy on tap / paste on hold.
         //
@@ -146,6 +147,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         break;
                 }
             }
+
             return false;
     }
 
