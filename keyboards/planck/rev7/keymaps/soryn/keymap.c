@@ -8,6 +8,7 @@ enum planck_layers { _BASE, _LOWER, _RAISE, _ADJUST, _FN_KEYS };
 
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
+#define FN_KEYS OSL(_FN_KEYS)
 
 #define UML_AE RALT(KC_Q)
 #define UML_OE RALT(KC_P)
@@ -48,10 +49,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_LOWER] = LAYOUT_planck_grid(
-    _______, _______, _______, _______, KC_MINS, KC_LABK, KC_RABK, KC_EQL,        _______, _______, _______, KC_DEL,
-    _______,  KC_DLR,   KC_AT, KC_LBRC, KC_LPRN, KC_LCBR, KC_RCBR, KC_RPRN,       KC_RBRC, KC_PERC, KC_HASH, KC_CIRC,
-    _______, _______, _______, _______, KC_EXLM, KC_AMPR, KC_BSLS, KC_ASTR,       _______, _______, KC_PGUP, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, OSL(_FN_KEYS), KC_HOME, KC_PGDN,  KC_END
+    _______, _______, _______, _______, KC_MINS, KC_LABK, KC_RABK, KC_EQL,  _______, _______, _______, KC_DEL,
+    _______,  KC_DLR,   KC_AT, KC_LBRC, KC_LPRN, KC_LCBR, KC_RCBR, KC_RPRN, KC_RBRC, KC_PERC, KC_HASH, KC_CIRC,
+    _______, _______, _______, _______, KC_EXLM, KC_AMPR, KC_BSLS, KC_ASTR, _______, _______, KC_PGUP, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, FN_KEYS, KC_HOME, KC_PGDN,  KC_END
 ),
 
 /* Raise
