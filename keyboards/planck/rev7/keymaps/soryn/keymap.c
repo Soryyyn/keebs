@@ -3,6 +3,7 @@
  */
 #include QMK_KEYBOARD_H
 #include "os_detection.h"
+#include "functions.c"
 
 enum planck_layers { _BASE, _LOWER, _RAISE, _ADJUST, _FN_KEYS };
 
@@ -15,6 +16,9 @@ enum planck_layers { _BASE, _LOWER, _RAISE, _ADJUST, _FN_KEYS };
 #define UML_UE RALT(KC_Y)
 
 #define MT_COPA LT(0, KC_NO)
+#define MT_A LT(0, KC_A)
+#define MT_O LT(0, KC_O)
+#define MT_U LT(0, KC_U)
 
 /* clang-format off */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -23,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * | Esc/~|  Q   |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Tab  |  A   |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  | ;/:  | '/"  |
+ * | Tab  | A/Ä  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  | ;/:  | '/"  |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |Shift |  Z   |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |  Up  | //?  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -32,7 +36,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_BASE] = LAYOUT_planck_grid(
     QK_GESC,    KC_Q,    KC_W,       KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-     KC_TAB,    KC_A,    KC_S,       KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+     KC_TAB,    MT_A,    KC_S,       KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT,    KC_Z,    KC_X,       KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_UP,   KC_SLSH,
     KC_LCTL, KC_LALT, KC_LGUI,    MT_COPA,   LOWER,  KC_SPC,  KC_SPC,   RAISE,   KC_ENT, KC_LEFT, KC_DOWN,   KC_RGHT
 ),
@@ -149,6 +153,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
 
+            return false;
+
+        // Umlaut mod-taps
+        // tap -> a / hold -> ä
+        case MT_A:
+            simpleOnPressAndHold(record, KC_A, UML_AE);
+        // tap -> o / hold -> ö
+        case MT_O:
+            return false;
+        // tap -> u / hold -> ü
+        case MT_U:
             return false;
     }
 
