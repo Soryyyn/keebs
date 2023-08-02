@@ -179,9 +179,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // Numpad 0 on and layer raise on hold.
         case MT_P0_SYM:
             if (record->tap.count && record->event.pressed) {
-                return true;
+                tap_code16(KC_P0);
+                break;
             } else if (record->event.pressed) {
                 layer_on(_RAISE);
+                return false;
             }
 
             return false;
