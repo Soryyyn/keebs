@@ -18,11 +18,8 @@ enum planck_layers { _BASE, _LOWER, _NUMBERS, _RAISE, _ADJUST, _FN_KEYS };
 
 #define MT_COPA LT(0, KC_NO)
 
-//
-// Tap-dance declarations.
-// enum {
-//     TD
-// }
+// Numbers layer mod-taps.
+#define MT_P0_SYM LT(0, KC_P0)
 
 /* clang-format off */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -125,14 +122,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |Reset |Debug |      |      |      |             |      |      |      |      |Sleep |
+ * |Reset |Debug |      |      |      |             |      | Test |      |      |Sleep |
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = LAYOUT_planck_grid(
     _______, KC_BTN1, KC_MS_U, KC_BTN2, _______, RGB_TOG, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD,
     _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    QK_BOOT, DB_TOGG, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_SLEP
+    QK_BOOT, DB_TOGG, _______, _______, _______, _______, _______, _______, MT_P0_SYM, _______, _______, KC_SLEP
 )
 
 };
@@ -176,6 +173,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
 
             return false;
+            break;
+
+        //
+        // Numpad 0 on and layer raise on hold.
+        case MT_P0_SYM:
+            simpleOnPressAndHold(record, KC_P0, RAISE);
+            break;
     }
 
     return true;
