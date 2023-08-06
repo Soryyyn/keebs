@@ -50,9 +50,9 @@ enum {
     TD_SQUARE_BRACKETS,
 
     // Umlauts.
-    TD_UML_AE,
-    TD_UML_OE,
-    TD_UML_UE,
+    // TD_UML_AE,
+    // TD_UML_OE,
+    // TD_UML_UE,
 };
 
 // Tap-dance definitions.
@@ -60,17 +60,17 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_PARARENTHESES] = ACTION_TAP_DANCE_DOUBLE(KC_LPRN, KC_RPRN),
     [TD_CURLY_BRACKETS] = ACTION_TAP_DANCE_DOUBLE(KC_LCBR, KC_RCBR),
     [TD_SQUARE_BRACKETS] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_RBRC),
-    [TD_UML_AE] = ACTION_TAP_DANCE_DOUBLE(KC_A, U_AE),
-    [TD_UML_OE] = ACTION_TAP_DANCE_DOUBLE(KC_A, U_OE),
-    [TD_UML_UE] = ACTION_TAP_DANCE_DOUBLE(KC_A, U_UE),
+    // [TD_UML_AE] = ACTION_TAP_DANCE_DOUBLE(KC_A, U_AE),
+    // [TD_UML_OE] = ACTION_TAP_DANCE_DOUBLE(KC_A, U_OE),
+    // [TD_UML_UE] = ACTION_TAP_DANCE_DOUBLE(KC_A, U_UE),
 };
 
 #define TD_PARL TD(TD_PARARENTHESES)
 #define TD_CURL TD(TD_CURLY_BRACKETS)
 #define TD_SQBR TD(TD_SQUARE_BRACKETS)
-#define TD_UMAE TD(TD_UML_AE)
-#define TD_UMOE TD(TD_UML_AE)
-#define TD_UMUE TD(TD_UML_AE)
+// #define TD_UMAE TD(TD_UML_AE)
+// #define TD_UMOE TD(TD_UML_AE)
+// #define TD_UMUE TD(TD_UML_AE)
 
 /* clang-format off */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -87,8 +87,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_BASE] = LAYOUT_planck_grid(
-     KC_ESC,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y, TD_UMUE,    KC_I, TD_UMOE,    KC_P, KC_BSPC,
-     KC_TAB, TD_UMAE,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
+     KC_ESC,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSPC,
+     KC_TAB,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
     KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT,   KC_UP, KC_SLSH,
     KC_LCTL, KC_LALT, KC_LGUI, MT_COPA,    NUMS,  KC_SPC,  KC_SPC,    SYMS,  KC_ENT, KC_LEFT, KC_DOWN, KC_RGHT
 ),
@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_NUMBERS] = LAYOUT_planck_grid(
     _______, _______, _______, _______, _______, _______, _______,   KC_P7,   KC_P8,   KC_P9, _______,  KC_DEL,
-    _______, _______, _______, _______, _______, _______, _______,   KC_P4,   KC_P5,   KC_P6, _______, _______,
+    _______,    U_AE,    U_OE,    U_UE, _______, _______, _______,   KC_P4,   KC_P5,   KC_P6, _______, _______,
     _______, _______, _______, _______, _______, _______, _______,   KC_P1,   KC_P2,   KC_P3, KC_PGUP, _______,
     _______, _______, _______, _______, _______, _______, _______, MT_P0SY, _______, KC_HOME, KC_PGDN,  KC_END
 ),
