@@ -21,10 +21,11 @@ enum layers {
 #define UML_OE RALT(KC_P)
 #define UML_UE RALT(KC_Y)
 
-#define MT_COPA LT(0, KC_NO)
+// Copy/paste shortcut
+#define MT_COPA LT(_BASE, KC_NO)
 
 // Numbers layer mod-taps.
-#define MT_P0SY LT(0, KC_P0)
+#define MT_P0SY LT(_SYMBOLS, KC_P0)
 
 // Tap-dance keys.
 enum {
@@ -218,15 +219,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         //
         // Numpad 0 on and layer raise on hold.
-        case MT_P0SY:
-            if (record->tap.count && record->event.pressed) {
-                tap_code16(KC_P0);
-            } else if (record->event.pressed) {
-                layer_on(_RAISE);
-            }
+        // case MT_P0SY:
+        //     if (record->tap.count && record->event.pressed) {
+        //         tap_code16(KC_P0);
+        //     } else if (record->event.pressed) {
+        //         layer_on();
+        //     }
 
-            return false;
-            break;
+        //     return false;
+        //     break;
     }
 
     return true;
