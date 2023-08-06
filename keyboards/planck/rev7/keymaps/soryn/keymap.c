@@ -48,11 +48,6 @@ enum {
     TD_PARARENTHESES,
     TD_CURLY_BRACKETS,
     TD_SQUARE_BRACKETS,
-
-    // Umlauts.
-    // TD_UML_AE,
-    // TD_UML_OE,
-    // TD_UML_UE,
 };
 
 // Tap-dance definitions.
@@ -60,17 +55,11 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_PARARENTHESES] = ACTION_TAP_DANCE_DOUBLE(KC_LPRN, KC_RPRN),
     [TD_CURLY_BRACKETS] = ACTION_TAP_DANCE_DOUBLE(KC_LCBR, KC_RCBR),
     [TD_SQUARE_BRACKETS] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_RBRC),
-    // [TD_UML_AE] = ACTION_TAP_DANCE_DOUBLE(KC_A, U_AE),
-    // [TD_UML_OE] = ACTION_TAP_DANCE_DOUBLE(KC_A, U_OE),
-    // [TD_UML_UE] = ACTION_TAP_DANCE_DOUBLE(KC_A, U_UE),
 };
 
 #define TD_PARL TD(TD_PARARENTHESES)
 #define TD_CURL TD(TD_CURLY_BRACKETS)
 #define TD_SQBR TD(TD_SQUARE_BRACKETS)
-// #define TD_UMAE TD(TD_UML_AE)
-// #define TD_UMOE TD(TD_UML_AE)
-// #define TD_UMUE TD(TD_UML_AE)
 
 /* clang-format off */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -110,6 +99,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______, _______,   KC_P1,   KC_P2,   KC_P3, KC_PGUP, _______,
     _______, _______, _______, _______, _______, _______, _______, MT_P0SY, _______, KC_HOME, KC_PGDN,  KC_END
 ),
+
+
 
 /* Symbols
  * ,-----------------------------------------------------------------------------------.
