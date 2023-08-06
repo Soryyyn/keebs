@@ -1,6 +1,5 @@
 #include QMK_KEYBOARD_H
 #include "os_detection.h"
-#include "functions.c"
 
 enum layers {
     _BASE,
@@ -10,13 +9,32 @@ enum layers {
     _FN_KEYS
 };
 
+enum unicodes {
+    L_AE,
+    U_AE,
+    L_OE,
+    U_OE,
+    L_UE,
+    U_UE
+};
+
+const uint32_t unicode_map[] PROGMEM = {
+    [L_AE]  = 0x00E4,  // ä
+    [U_AE] = 0x00C4,  // Ä
+    [L_OE]  = 0x00F6,  // ö
+    [U_OE] = 0x00D6,  // Ö
+    [L_UE]  = 0x00FC,  // ü
+    [U_UE] = 0x00DC,  // Ü
+};
+
+// Umlauts with unicode.
+#define U_AE XP(L_AE, U_AE)
+#define U_OE XP(L_OE, U_OE)
+#define U_UE XP(L_UE, U_UE)
+
 #define NUMS MO(_NUMBERS)
 #define SYMS MO(_SYMBOLS)
 #define FN_KEYS OSL(_FN_KEYS)
-
-// #define UML_AE LT(_BASE, KC_A)
-// #define UML_OE RALT(KC_P)
-// #define UML_UE RALT(KC_Y)
 
 // Copy/paste shortcut
 #define MT_COPA LT(_BASE, KC_NO)
@@ -32,7 +50,9 @@ enum {
     TD_SQUARE_BRACKETS,
 
     // Umlauts.
-    TD_UML_AE
+    TD_UML_AE,
+    TD_UML_OE,
+    TD_UML_UE,
 };
 
 // Tap-dance definitions.
@@ -40,20 +60,24 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_PARARENTHESES] = ACTION_TAP_DANCE_DOUBLE(KC_LPRN, KC_RPRN),
     [TD_CURLY_BRACKETS] = ACTION_TAP_DANCE_DOUBLE(KC_LCBR, KC_RCBR),
     [TD_SQUARE_BRACKETS] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_RBRC),
-    [TD_UML_AE] = ACTION_TAP_DANCE_FN(fn_td_uml_ae),
+    [TD_UML_AE] = ACTION_TAP_DANCE_DOUBLE(KC_A, U_AE),
+    [TD_UML_OE] = ACTION_TAP_DANCE_DOUBLE(KC_A, U_OE),
+    [TD_UML_UE] = ACTION_TAP_DANCE_DOUBLE(KC_A, U_UE),
 };
 
 #define TD_PARL TD(TD_PARARENTHESES)
 #define TD_CURL TD(TD_CURLY_BRACKETS)
 #define TD_SQBR TD(TD_SQUARE_BRACKETS)
 #define TD_UMAE TD(TD_UML_AE)
+#define TD_UMOE TD(TD_UML_AE)
+#define TD_UMUE TD(TD_UML_AE)
 
 /* clang-format off */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Base
  * ,-----------------------------------------------------------------------------------.
- * | Esc  |  Q   |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
+ * | Esc  |  Q   |   W  |   E  |   R  |   T  |   Y  | U/Ü  |   I  | O/Ö  |   P  | Bksp |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * | Tab  | A/Ä  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  | ;/:  | '/"  |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
@@ -63,10 +87,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_BASE] = LAYOUT_planck_grid(
-     KC_ESC,    KC_Q,    KC_W,       KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-     KC_TAB, TD_UMAE,    KC_S,       KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-    KC_LSFT,    KC_Z,    KC_X,       KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_UP,   KC_SLSH,
-    KC_LCTL, KC_LALT, KC_LGUI,    MT_COPA,    NUMS,  KC_SPC,  KC_SPC,    SYMS,   KC_ENT, KC_LEFT, KC_DOWN,   KC_RGHT
+     KC_ESC,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y, TD_UMUE,    KC_I, TD_UMOE,    KC_P, KC_BSPC,
+     KC_TAB, TD_UMAE,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
+    KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT,   KC_UP, KC_SLSH,
+    KC_LCTL, KC_LALT, KC_LGUI, MT_COPA,    NUMS,  KC_SPC,  KC_SPC,    SYMS,  KC_ENT, KC_LEFT, KC_DOWN, KC_RGHT
 ),
 
 /* Numbers
