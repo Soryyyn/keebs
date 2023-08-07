@@ -21,7 +21,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // Copy on tap / paste on hold.
         //
         // Also changes to command + <key> on macos.
-        case COP_PAS:
+        case SP_COPA:
             if (record->tap.count && record->event.pressed) {
                 switch (detected_os) {
                     case OS_MACOS:
