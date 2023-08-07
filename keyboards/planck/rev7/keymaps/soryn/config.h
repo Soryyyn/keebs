@@ -42,15 +42,11 @@
 */
 // #define MIDI_ADVANCED
 
-/*
-   Mousekey settings.
-*/
+//
+// Change the mousekey settings.
 #define MOUSEKEY_INTERVAL 10
 #define MOUSEKEY_MAX_SPEED 4
 
-/*
-   RGB settings.
-*/
+//
+// Turn of the backlight once the PC goes into sleep.
 #define RGBLIGHT_SLEEP true
-
-#define UNICODE_SELECTED_MODES UNICODE_MODE_WINCOMPOSE
