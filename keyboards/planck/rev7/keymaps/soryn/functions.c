@@ -1,10 +1,4 @@
 //
-// After most things are setup with the keyboard, this step gets executed.
-//
-// Changes the unicode input mode to either macos or windows.
-// void keyboard_post_init_user() {}
-
-//
 // Turn on adjust layer when holding down both raise and lower.
 layer_state_t layer_state_set_user(layer_state_t state) {
     return update_tri_layer_state(state, _NUMBERS, _SYMBOLS, _ADJUST);
