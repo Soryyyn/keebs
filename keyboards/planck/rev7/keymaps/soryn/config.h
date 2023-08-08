@@ -50,3 +50,7 @@
 //
 // Turn of the backlight once the PC goes into sleep.
 #define RGBLIGHT_SLEEP true
+
+//
+// Set "permissive hold" mode on
+#define PERMISSIVE_HOLD true
