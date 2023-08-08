@@ -44,8 +44,10 @@
 
 //
 // Change the mousekey settings.
-#define MOUSEKEY_INTERVAL 10
-#define MOUSEKEY_MAX_SPEED 4
+// #define MOUSEKEY_INTERVAL 10
+// #define MOUSEKEY_MAX_SPEED 4
+#define MK_3_SPEED true
+#define MK_C_INTERVAL_UNMOD 10
 
 //
 // Turn of the backlight once the PC goes into sleep.
