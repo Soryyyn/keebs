@@ -118,19 +118,5 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* clang-format on */
 
 //
-// Combos
-enum combos {
-    P_BSPC_DEL,
-};
-
-const uint16_t PROGMEM delete_combo[] = {KC_P, KC_BSPC, COMBO_END};
-combo_t key_combos[COMBO_COUNT] = {
-    //
-    // Send `DELETE` when `BACKSPACE` & `P`.
-    [P_BSPC_DEL] = COMBO(delete_combo, KC_DEL),
-};
-
-
-//
 // Import QMK functions.
 #include "functions.c"

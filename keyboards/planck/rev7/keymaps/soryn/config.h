@@ -56,4 +56,3 @@
 #define PERMISSIVE_HOLD true
 
 #define FORCE_NKRO
-#define COMBO_COUNT 1
