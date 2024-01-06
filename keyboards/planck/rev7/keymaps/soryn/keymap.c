@@ -1,6 +1,5 @@
 #include QMK_KEYBOARD_H
 #include "os_detection.h"
-#include "tap_dance.c"
 
 enum layers {
     _BASE,
@@ -21,15 +20,6 @@ enum layers {
 #define SP_COPA LT(_BASE, KC_NO) // Copy / paste
 #define SP_0SYM LT(_SYMBOLS, KC_0) // Symbol layer on hold / 0 on press.
 #define SP_HYES MT(MOD_HYPR, KC_ESC) // Hyper on escape hold / normal escape on press (Hyper = CTRL & Shift & Alt & GUI)
-
-//
-// Combos
-const uint16_t PROGMEM delete_combo[] = {KC_P, KC_BSPC, COMBO_END};
-combo_t key_combos[] = {
-    //
-    // Send `DELETE` when `BACKSPACE` & `P`.
-    COMBO(delete_combo, KC_DEL),
-};
 
 /* clang-format off */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -126,6 +116,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 /* clang-format on */
+//
+//
+// Combos
+const uint16_t PROGMEM delete_combo[] = {KC_P, KC_BSPC, COMBO_END};
+combo_t key_combos[] = {
+    //
+    // Send `DELETE` when `BACKSPACE` & `P`.
+    COMBO(delete_combo, KC_DEL),
+};
+
 
 //
 // Import QMK functions.
