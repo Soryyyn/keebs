@@ -120,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //
 // Combos
 const uint16_t PROGMEM delete_combo[] = {KC_P, KC_BSPC, COMBO_END};
-combo_t key_combos[] = {
+combo_t key_combos[COMBO_COUNT] = {
     //
     // Send `DELETE` when `BACKSPACE` & `P`.
     COMBO(delete_combo, KC_DEL),
