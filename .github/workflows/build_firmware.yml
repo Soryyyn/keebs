@@ -40,7 +40,9 @@ jobs:
       contents: write
       pull-requests: write
     runs-on: ubuntu-latest
-    container: qmkfm/qmk_cli
+    container:
+      image: qmkfm/qmk_cli
+      options: --user 1001
     steps:
       - uses: actions/checkout@v3
         with:
