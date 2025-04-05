@@ -20,6 +20,8 @@ jobs:
           filters: |
             keyboards/planck/rev7/keymaps/soryn:
                 - 'keyboards/planck/rev7/keymaps/soryn/**'
+            keyboards/splaytoraid/keymaps/soryn:
+                - 'keyboards/splaytoraid/keymaps/soryn/**'
 
   build_firmware:
     name: ${{matrix.keyboard}}
@@ -46,12 +48,12 @@ jobs:
       - name: Build firmware
         uses: Soryyyn/qmk-build@v1.2
         with:
-          keymap-path: "keyboards/planck/rev7/keymaps/soryn"
+          keymap-path: "${{matrix.keyboard}}"
           keyboard: "${{ steps.split.outputs._1 }}/${{ steps.split.outputs._2}}"
           keymap: "${{ steps.split.outputs._4}}"
       - name: Move firmware to folder
         run: |
-          cp ./build/*.hex ./build/*.bin ./firmware
+          cp ./build/*.hex ./build/*.bin ./build/*.uf2 ./firmware
       - name: Upload firmware to repo
         uses: EndBug/add-and-commit@v9
         with:
