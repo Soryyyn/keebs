@@ -50,10 +50,10 @@ jobs:
   build:
     name: Build firmware for ${{matrix.keyboard}}
     needs: [qmk-setup, get-changes]
-    if: ${{needs.changes.outputs.keyboards != '[]' && needs.changes.outputs.keyboards != ''}}
+    if: ${{needs.get-changes.outputs.keyboards != '[]' && needs.get-changes.outputs.keyboards != ''}}
     strategy:
       matrix:
-        keyboard: ${{ fromJSON(needs.changes.outputs.keyboards) }}
+        keyboard: ${{ fromJSON(needs.get-changes.outputs.keyboards) }}
     permissions:
       contents: write
       pull-requests: write
