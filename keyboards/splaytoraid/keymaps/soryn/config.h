@@ -9,8 +9,16 @@
 // Able to create 16 layers.
 #define DYNAMIC_KEYMAP_LAYER_COUNT 16
 
-// Homerow mod settings.
 // Configure the global tapping term (default: 200ms)
-#define TAPPING_TERM 200
+#define TAPPING_TERM 180
+
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define QUICK_TAP_TERM 0
+
+// Turn of the backlight once the PC goes into sleep.
+#define RGBLIGHT_SLEEP true
+
+// Set "permissive hold" mode on
+#define PERMISSIVE_HOLD true
+
+#define RETRO_TAPPING
