@@ -35,6 +35,8 @@ jobs:
       keyboards: ${{steps.filter.outputs.changes}}
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
       - name: Detect which keyboard had changes
         uses: dorny/paths-filter@v2
         id: filter
