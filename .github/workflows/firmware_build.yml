@@ -46,14 +46,14 @@ jobs:
           separator: /
           limit: -1
       - name: Build firmware
-        uses: Soryyyn/qmk-build@v1.2
+        uses: Soryyyn/qmk-build@v1.3.1
         with:
           keymap-path: "${{matrix.keyboard}}"
           keyboard: "${{ steps.split.outputs._1 }}/${{ steps.split.outputs._2}}"
           keymap: "${{ steps.split.outputs._4}}"
       - name: Move firmware to folder
         run: |
-          cp -t ./firmware ./build/*.hex ./build/*.bin ./build/*.uf2
+          cp ./build/* ./firmware
       - name: Upload firmware to repo
         uses: EndBug/add-and-commit@v9
         with:
