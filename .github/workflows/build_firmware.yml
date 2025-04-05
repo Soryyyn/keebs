@@ -24,9 +24,9 @@ jobs:
         id: filter
         with:
           filters: |
-            keyboards/planck/rev7/keymaps/soryn:
+            planck/rev7:soryn:
                 - 'keyboards/planck/rev7/keymaps/soryn/**'
-            keyboards/splaytoraid/keymaps/soryn:
+            splaytoraid:soryn:
                 - 'keyboards/splaytoraid/keymaps/soryn/**'
 
   build:
@@ -57,17 +57,10 @@ jobs:
       - name: Clone config into QMK repo
         run: |
           cp -rup ./keyboards/* ./qmk_firmware/keyboards/
-      - name: Split keyboard string for build
-        uses: xom9ikk/split@v1
-        id: split
-        with:
-          string: ${{matrix.keyboard}}
-          separator: /
-          limit: -1
       - name: Compile firmware
         run: |
           cd ./qmk_firmware
-          make ${{steps.split.outputs._1}}:${{steps.split.outputs._3}}
+          make ${{matrix.keyboard}}
       - name: Move built firmware to folder
         continue-on-error: true
         run: |
