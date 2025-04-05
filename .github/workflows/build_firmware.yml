@@ -44,8 +44,8 @@ jobs:
           filters: |
             keyboards/planck/rev7/keymaps/soryn:
                 - 'keyboards/planck/rev7/keymaps/soryn/**'
-            keyboards/0xcb/splaytoraid/keymaps/soryn:
-                - 'keyboards/0xcb/splaytoraid/keymaps/soryn/**'
+            keyboards/splaytoraid/keymaps/soryn:
+                - 'keyboards/splaytoraid/keymaps/soryn/**'
 
   build:
     name: Build firmware for ${{matrix.keyboard}}
