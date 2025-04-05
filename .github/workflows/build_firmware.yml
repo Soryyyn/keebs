@@ -8,25 +8,8 @@ env:
   QMK_BRANCH: vial
 
 jobs:
-  qmk-setup:
-    name: Setup QMK (vial)
-    runs-on: ubuntu-latest
-    container: qmkfm/qmk_cli
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Get Vial fork
-        run: |
-          git clone https://github.com/$QMK_REPO.git --depth 1 --branch $QMK_BRANCH ./qmk_firmware
-      - name: Setup QMK
-        run: |
-          qmk config user.qmk_home=./qmk_firmware
-          qmk setup -y
-
   get-changes:
     name: Detect which configs changed
-    needs: qmk-setup
     runs-on: ubuntu-latest
     container: qmkfm/qmk_cli
     permissions:
@@ -49,7 +32,7 @@ jobs:
 
   build:
     name: Build firmware for ${{matrix.keyboard}}
-    needs: [qmk-setup, get-changes]
+    needs: get-changes
     if: ${{needs.get-changes.outputs.keyboards != '[]' && needs.get-changes.outputs.keyboards != ''}}
     strategy:
       matrix:
@@ -63,6 +46,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.ref }}
+      - name: Get Vial fork
+        run: |
+          git clone https://github.com/$QMK_REPO.git --depth 1 --branch $QMK_BRANCH ./qmk_firmware
+      - name: Setup QMK
+        run: |
+          qmk config user.qmk_home=./qmk_firmware
+          qmk setup -y
       - name: Clone config into QMK repo
         run: |
           cp -rup ./${{matrix.keyboard}}/* ./qmk_firmware/keyboards/
