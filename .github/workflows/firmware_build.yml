@@ -53,7 +53,7 @@ jobs:
           keymap: "${{ steps.split.outputs._4}}"
       - name: Move firmware to folder
         run: |
-          cp ./build/*.hex ./build/*.bin ./build/*.uf2 ./firmware
+          cp -t ./firmware ./build/*.hex ./build/*.bin ./build/*.uf2
       - name: Upload firmware to repo
         uses: EndBug/add-and-commit@v9
         with:
