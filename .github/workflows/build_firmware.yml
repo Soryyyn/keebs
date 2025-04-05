@@ -1,0 +1,76 @@
+name: Build kb firmware
+
+on:
+  pull_request:
+
+env:
+  QMK_REPO: vial-kb/vial-qmk
+  QMK_BRANCH: vial
+
+jobs:
+  qmk-setup:
+    name: Setup QMK (vial)
+    runs-on: ubuntu-latest
+    container: qmkfm/qmk_cli
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Get Vial fork
+        run: |
+          git clone https://github.com/$QMK_REPO.git --depth 1 --branch $QMK_BRANCH ./qmk_firmware
+      - name: Setup QMK
+        run: |
+          qmk config user.qmk_home=./qmk_firmware
+          qmk setup -y
+
+  get-changes:
+    name: Detect which configs changed
+    needs: qmk-setup
+    runs-on: ubuntu-latest
+    container: qmkfm/qmk_cli
+    permissions:
+      pull-requests: read
+    outputs:
+      keyboards: ${{steps.filter.outputs.changes}}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Detect which keyboard had changes
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            keyboards/planck/rev7/keymaps/soryn:
+                - 'keyboards/planck/rev7/keymaps/soryn/**'
+            keyboards/0xcb/splaytoraid/keymaps/soryn:
+                - 'keyboards/0xcb/splaytoraid/keymaps/soryn/**'
+
+  build:
+    name: Build firmware for ${{matrix.keyboard}}
+    needs: [qmk-setup, get-changes]
+    if: ${{needs.changes.outputs.keyboards != '[]' && needs.changes.outputs.keyboards != ''}}
+    strategy:
+      matrix:
+        keyboard: ${{ fromJSON(needs.changes.outputs.keyboards) }}
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    container: qmkfm/qmk_cli
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - name: Clone config into QMK repo
+        run: |
+          cp -rup ./${{matrix.keyboard}}/* ./qmk_firmware/keyboards/
+      - name: Split keyboard string for build
+        uses: xom9ikk/split@v1
+        id: split
+        with:
+          string: ${{matrix.keyboard}}
+          separator: /
+          limit: -1
+      - name: Compile firmware
+        run: |
+          echo ${{steps.split.outputs}}
