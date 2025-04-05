@@ -11,7 +11,6 @@ jobs:
   get-changes:
     name: Detect which configs changed
     runs-on: ubuntu-latest
-    container: qmkfm/qmk_cli
     permissions:
       pull-requests: read
     outputs:
@@ -55,7 +54,7 @@ jobs:
           qmk setup -y
       - name: Clone config into QMK repo
         run: |
-          cp -rup ./${{matrix.keyboard}}/* ./qmk_firmware/keyboards/
+          cp -rup ./keyboards/* ./qmk_firmware/keyboards/
       - name: Split keyboard string for build
         uses: xom9ikk/split@v1
         id: split
@@ -65,4 +64,6 @@ jobs:
           limit: -1
       - name: Compile firmware
         run: |
-          echo ${{steps.split.outputs}}
+          ls ./qmk_firmware/keyboards
+          cd ./qmk_firmware
+          make ${{steps.split.outputs._1}}:${{steps.split.outputs._3}}
