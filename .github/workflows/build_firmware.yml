@@ -67,9 +67,10 @@ jobs:
           cd ./qmk_firmware
           make ${{steps.split.outputs._1}}:${{steps.split.outputs._3}}
       - name: Move built firmware to folder
+        continue-on-error: true
         run: |
           cp ./qmk_firmware/*.hex ./qmk_firmware/*.bin ./qmk_firmware/*.uf2 ./firmware
-      - name: Upload firmware to branch
+      - name: Upload firmware to PR
         uses: EndBug/add-and-commit@v9
         with:
           add: "./firmware"
