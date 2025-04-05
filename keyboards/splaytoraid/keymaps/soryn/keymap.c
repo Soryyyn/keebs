@@ -12,15 +12,15 @@ enum layer_names {
 
 // Homerow mods
 // Left side
-#define HRM_A MT(KC_LGUI, KC_A)
-#define HRM_S MT(KC_LALT, KC_S)
-#define HRM_D MT(KC_LCTL, KC_D)
-#define HRM_F MT(KC_LSFT, KC_F)
+#define GUI_A LGUI_T(KC_A)
+#define ALT_S LALT_T(KC_S)
+#define CTL_D LCTL_T(KC_D)
+#define SFT_F LSFT_T(KC_F)
 // Right side
-#define HRM_SC MT(KC_LGUI, KC_SCLN)
-#define HRM_L MT(KC_LALT, KC_L)
-#define HRM_K MT(KC_LCTL, KC_K)
-#define HRM_J MT(KC_LSFT, KC_J)
+#define GUI_SCLN RGUI_T(KC_SCLN)
+#define ALT_L LALT_T(KC_L)
+#define CTL_K RCTL_T(KC_K)
+#define SFT_J RSFT_T(KC_J)
 
 // Layer triggers
 #define ENT_SYM LT(_SYMBOLS, KC_ENT)
@@ -30,7 +30,7 @@ enum layer_names {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_40(
               KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,               KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,
-    KC_ESC,   HRM_A,    HRM_S,    HRM_D,    HRM_F,    KC_G,               KC_H,     HRM_J,    HRM_K,    HRM_L,    HRM_SC,   KC_BSLS,
+    KC_ESC,   GUI_A,    ALT_S,    CTL_D,    SFT_F,    KC_G,               KC_H,     SFT_J,    CTL_K,    ALT_L,    GUI_SCLN,   KC_BSLS,
     KC_CAPS,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,               KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  KC_QUOT,
                                   KC_RALT,  KC_TAB,   KC_SPC,             ENT_SYM,  BSP_NUM,  DEL_FUN
   ),
