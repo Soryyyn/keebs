@@ -5,6 +5,7 @@
 
 enum layer_names {
     _BASE,
+    _NAVIGATION,
     _SYMBOLS,
     _NUMBERS,
     _FUNCTIONS
@@ -23,6 +24,7 @@ enum layer_names {
 #define SFT_J RSFT_T(KC_J)
 
 // Layer triggers
+#define TAB_NAV LT(_NAVIGATION, KC_TAB)
 #define ENT_SYM LT(_SYMBOLS, KC_ENT)
 #define BSP_NUM LT(_NUMBERS, KC_BSPC)
 #define DEL_FUN LT(_FUNCTIONS, KC_DEL)
@@ -33,6 +35,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_ESC,    GUI_A,    ALT_S,    CTL_D,    SFT_F,     KC_G,               KC_H,    SFT_J,    CTL_K,    ALT_L, GUI_SCLN,  KC_BSLS,
     KC_CAPS,     KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,               KC_N,     KC_M,  KC_COMM,   KC_DOT,  KC_SLSH,  KC_QUOT,
                                   KC_RALT,   KC_TAB,   KC_SPC,            ENT_SYM,  BSP_NUM,  DEL_FUN
+  ),
+
+  [_NAVIGATION] = LAYOUT_40(
+              XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    XXXXXXX,  KC_LGUI,  KC_LALT,  KC_LSFT,  KC_LCTL,  XXXXXXX,            XXXXXXX,  KC_LSFT,  KC_LCTL,  KC_LALT,  KC_LGUI,  XXXXXXX,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+                                  XXXXXXX,  XXXXXXX,  XXXXXXX,             KC_ENT,  KC_BSPC,   KC_DEL
   ),
 
   [_SYMBOLS] = LAYOUT_40(
@@ -53,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                KC_F12,    KC_F7,    KC_F8,    KC_F9,  XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
     XXXXXXX,   KC_F11,    KC_F4,    KC_F5,    KC_F6,  XXXXXXX,            XXXXXXX,  KC_LSFT,  KC_LCTL,  KC_LALT,  KC_LGUI,  XXXXXXX,
     XXXXXXX,   KC_F10,    KC_F1,    KC_F2,    KC_F3,  XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-                                  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX
+                                   KC_APP,   KC_TAB,   KC_SPC,            XXXXXXX,  XXXXXXX,  XXXXXXX
   )
 };
 
