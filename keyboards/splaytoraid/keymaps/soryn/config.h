@@ -13,11 +13,8 @@
 #define TAPPING_TERM 180
 
 // Turn of the backlight once the PC goes into sleep.
-#define RGBLIGHT_SLEEP
+#define RGBLIGHT_SLEEP true
 
-// Set "permissive hold" mode on
-#define PERMISSIVE_HOLD
+#define RETRO_TAPPING true
 
-#define RETRO_TAPPING
-
-#define FORCE_NKRO
+#define FORCE_NKRO true
