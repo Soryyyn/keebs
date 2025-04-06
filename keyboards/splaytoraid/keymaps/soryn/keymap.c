@@ -29,17 +29,17 @@ enum layer_names {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_40(
-              KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,               KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,
-    KC_ESC,   GUI_A,    ALT_S,    CTL_D,    SFT_F,    KC_G,               KC_H,     SFT_J,    CTL_K,    ALT_L,    GUI_SCLN,   KC_BSLS,
-    KC_CAPS,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,               KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  KC_QUOT,
-                                  KC_RALT,  KC_TAB,   KC_SPC,             ENT_SYM,  BSP_NUM,  DEL_FUN
+                 KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,               KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,
+     KC_ESC,    GUI_A,    ALT_S,    CTL_D,    SFT_F,     KC_G,               KC_H,    SFT_J,    CTL_K,    ALT_L, GUI_SCLN,  KC_BSLS,
+    KC_CAPS,     KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,               KC_N,     KC_M,  KC_COMM,   KC_DOT,  KC_SLSH,  KC_QUOT,
+                                  KC_RALT,   KC_TAB,   KC_SPC,            ENT_SYM,  BSP_NUM,  DEL_FUN
   ),
 
   [_SYMBOLS] = LAYOUT_40(
-              _______,  _______,  _______,  _______,  _______,            _______,  _______,  _______,  _______,  _______,
-    _______,  _______,  _______,  _______,  _______,  _______,            _______,  _______,  _______,  _______,  _______,  _______,
-    _______,  _______,  _______,  _______,  _______,  _______,            _______,  _______,  _______,  _______,  _______,  _______,
-                                  _______,  _______,  _______,            _______,  _______,  _______
+             S(KC_LBRC), S(KC_7), S(KC_8),   S(KC_9),  S(KC_RBRC),        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    XXXXXXX, S(KC_SCLN), S(KC_4), S(KC_5),   S(KC_6),   S(KC_EQL),        XXXXXXX,  KC_LSFT,  KC_LCTL,  KC_LALT,  KC_LGUI,  XXXXXXX,
+    XXXXXXX,  S(KC_GRV), S(KC_1), S(KC_2),   S(KC_3),  S(KC_BSLS),        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+                                S(KC_DOT),   S(KC_0),  S(KC_MINS),        XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
 
   [_NUMBERS] = LAYOUT_40(
