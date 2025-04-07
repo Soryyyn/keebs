@@ -38,9 +38,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_NAVIGATION] = LAYOUT_40(
-              XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-    XXXXXXX,  KC_LGUI,  KC_LALT,  KC_LSFT,  KC_LCTL,  XXXXXXX,            XXXXXXX,  KC_LSFT,  KC_LCTL,  KC_LALT,  KC_LGUI,  XXXXXXX,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+              XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            KC_UNDO,  KC_PSTE,  KC_COPY,   KC_CUT, S(KC_UNDO),
+    XXXXXXX,  KC_LGUI,  KC_LALT,  KC_LSFT,  KC_LCTL,  XXXXXXX,            XXXXXXX,  KC_LEFT,  KC_DOWN,    KC_UP,    KC_RGHT,  XXXXXXX,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  KC_HOME,  KC_PGDN,  KC_PGUP,     KC_END,  XXXXXXX,
                                   XXXXXXX,  XXXXXXX,  XXXXXXX,             KC_ENT,  KC_BSPC,   KC_DEL
   ),
 
@@ -68,10 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_BASE] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [_NUMBERS] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [_SYMBOLS] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [_FUNCTIONS] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) }
+    [_BASE] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) }
 };
 
 bool dip_switch_update_user(uint8_t index, bool active) {
