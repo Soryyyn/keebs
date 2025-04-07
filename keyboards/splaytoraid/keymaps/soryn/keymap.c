@@ -68,7 +68,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_BASE] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) }
+    [_BASE] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [_NAVIGATION] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [_SYMBOLS] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [_NUMBERS] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [_FUNCTIONS] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) }
 };
 
 bool dip_switch_update_user(uint8_t index, bool active) {
