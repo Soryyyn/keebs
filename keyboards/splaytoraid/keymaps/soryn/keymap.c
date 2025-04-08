@@ -49,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              S(KC_LBRC), S(KC_7), S(KC_8),   S(KC_9),  S(KC_RBRC),        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
     XXXXXXX, S(KC_SCLN), S(KC_4), S(KC_5),   S(KC_6),   S(KC_EQL),        XXXXXXX,  KC_LSFT,  KC_LCTL,  KC_LALT,  KC_LGUI,  XXXXXXX,
     XXXXXXX,  S(KC_GRV), S(KC_1), S(KC_2),   S(KC_3),  S(KC_BSLS),        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-                                S(KC_DOT),   S(KC_0),  S(KC_MINS),        XXXXXXX,  XXXXXXX,  XXXXXXX
+                                  KC_RPRN,   KC_RPRN,  S(KC_MINS),        XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
 
   [_NUMBERS] = LAYOUT_40(
