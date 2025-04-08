@@ -1,0 +1,74 @@
+name: Build kb firmware
+
+on:
+  pull_request:
+
+env:
+  QMK_REPO: vial-kb/vial-qmk
+  QMK_BRANCH: vial
+
+jobs:
+  get-changes:
+    name: Detect which configs changed
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      keyboards: ${{steps.filter.outputs.changes}}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - name: Detect which keyboard had changes
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            planck/rev7:soryn:
+                - 'keyboards/planck/rev7/keymaps/soryn/**'
+            splaytoraid:soryn:
+                - 'keyboards/splaytoraid/keymaps/soryn/**'
+
+  build:
+    name: Build firmware for ${{matrix.keyboard}}
+    needs: get-changes
+    if: ${{needs.get-changes.outputs.keyboards != '[]' && needs.get-changes.outputs.keyboards != ''}}
+    strategy:
+      matrix:
+        keyboard: ${{ fromJSON(needs.get-changes.outputs.keyboards) }}
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    container:
+      image: qmkfm/qmk_cli
+      options: --user 1001
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - name: Get Vial fork
+        run: |
+          git clone https://github.com/$QMK_REPO.git --depth 1 --branch $QMK_BRANCH ./qmk_firmware
+      - name: Setup QMK
+        run: |
+          qmk config user.qmk_home=./qmk_firmware
+          qmk setup -y
+      - name: Clone config into QMK repo
+        run: |
+          cp -rup ./keyboards/* ./qmk_firmware/keyboards/
+      - name: Compile firmware
+        run: |
+          cd ./qmk_firmware
+          make ${{matrix.keyboard}}
+      - name: Move built firmware to folder
+        continue-on-error: true
+        run: |
+          cp ./qmk_firmware/*.hex ./qmk_firmware/*.bin ./qmk_firmware/*.uf2 ./firmware
+      - name: Upload firmware to PR
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "./firmware"
+          message: "chore(firmware): Upload newest firmware for ${{matrix.keyboard}}"
+          pathspec_error_handling: exitAtEnd
+          default_author: github_actions
