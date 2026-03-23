@@ -16,9 +16,9 @@ QMK compiles from its own copy of the keymap, not this repo directly - the scrip
 
 ### Setting up vial-qmk
 
-Required for keyboards using Vial (e.g. splaytoraid):
+Required for keyboards using Vial (e.g. splaytoraid). Clone into the repo root:
 
 ```bash
-git clone https://github.com/vial-kb/vial-qmk.git ~/vial-qmk
-cd ~/vial-qmk && make git-submodule
+git clone https://github.com/vial-kb/vial-qmk.git vial-qmk
+cd vial-qmk && make git-submodule
 ```

@@ -18,15 +18,17 @@ if [[ -z "$KB" || -z "$KM" ]]; then
     exit 1
 fi
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 if [[ "$VIAL" == true ]]; then
-    QMK_DIR="${VIAL_QMK_DIR:-$HOME/vial-qmk}"
+    QMK_DIR="${VIAL_QMK_DIR:-$SCRIPT_DIR/vial-qmk}"
     if [[ ! -d "$QMK_DIR" ]]; then
         echo "Error: vial-qmk not found at $QMK_DIR"
-        echo "Clone it with: git clone https://github.com/vial-kb/vial-qmk.git ~/vial-qmk && cd ~/vial-qmk && make git-submodule"
+        echo "Clone it with: git clone https://github.com/vial-kb/vial-qmk.git vial-qmk && cd vial-qmk && make git-submodule"
         exit 1
     fi
 else
-    QMK_DIR="${QMK_DIR:-$HOME/qmk_firmware}"
+    QMK_DIR="${QMK_DIR:-$SCRIPT_DIR/qmk_firmware}"
 fi
 
 SRC="keyboards/$KB/keymaps/$KM"
