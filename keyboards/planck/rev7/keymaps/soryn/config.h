@@ -48,8 +48,12 @@
 #define MOUSEKEY_MAX_SPEED 4
 
 //
-// Turn of the backlight once the PC goes into sleep.
-#define RGBLIGHT_SLEEP true
+// Turn off the backlight once the PC goes into sleep.
+#define RGB_MATRIX_SLEEP
+
+//
+// Enable typing heatmap effect.
+#define ENABLE_RGB_MATRIX_TYPING_HEATMAP
 
 //
 // Set "permissive hold" mode on
