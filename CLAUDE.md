@@ -2,17 +2,12 @@
 
 ## Building firmware
 
-Before compiling, sync the keymap files from this repo to qmk_firmware - QMK compiles from its own copy, not this repo directly:
+QMK compiles from its own copy of the keymap, not this repo directly. Before compiling, sync the keymap files:
 
 ```bash
-cp keyboards/planck/rev7/keymaps/soryn/keymap.c ~/qmk_firmware/keyboards/planck/rev7/keymaps/soryn/keymap.c
-cp keyboards/planck/rev7/keymaps/soryn/functions.c ~/qmk_firmware/keyboards/planck/rev7/keymaps/soryn/functions.c
-```
-
-Then compile:
-
-```bash
-qmk compile -kb planck/rev7 -km soryn
+KB=planck/rev7 KM=soryn
+cp -r keyboards/$KB/keymaps/$KM/. ~/qmk_firmware/keyboards/$KB/keymaps/$KM/
+qmk compile -kb $KB -km $KM
 ```
 
 ## Copying firmware to the repo
