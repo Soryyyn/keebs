@@ -2,18 +2,10 @@
 
 ## Building firmware
 
-QMK compiles from its own copy of the keymap, not this repo directly. Before compiling, sync the keymap files:
+Use `build.sh` which syncs the keymap to qmk_firmware, compiles, and copies the binary to `firmware/`:
 
 ```bash
-KB=planck/rev7 KM=soryn
-cp -r keyboards/$KB/keymaps/$KM/. ~/qmk_firmware/keyboards/$KB/keymaps/$KM/
-qmk compile -kb $KB -km $KM
+./build.sh planck/rev7 soryn
 ```
 
-## Copying firmware to the repo
-
-After a successful build, copy the `.bin` from the qmk_firmware root to `firmware/`:
-
-```bash
-cp ~/qmk_firmware/planck_rev7_soryn.bin firmware/
-```
+QMK compiles from its own copy of the keymap, not this repo directly - the script handles the sync automatically.
