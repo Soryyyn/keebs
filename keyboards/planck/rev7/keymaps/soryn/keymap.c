@@ -22,7 +22,7 @@ enum custom_keycodes {
 // Shorthand layers.
 #define NUMS MO(_NUMBERS)
 #define SYMS MO(_SYMBOLS)
-#define NAV MO(_NAV)
+#define NAV_SPC LT(_NAV, KC_SPC)
 #define SPECIAL OSL(_SPECIAL)
 
 /* clang-format off */
@@ -36,14 +36,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |Shift |  Z   |  X   |  C   |  V   |  B   |  N   |  M   | ,/<  | ./>  | //?  | -/_  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl | Alt  | GUI  |Hyper | NUM  |Space | NAV  | SYM  |Enter | Play | VolD | VolU |
+ * | Ctrl | Alt  | GUI  |Hyper | NUM  |Spc/NV| Bksp | SYM  |Enter | Play | VolD | VolU |
  * `-----------------------------------------------------------------------------------'
  */
 [_BASE] = LAYOUT_planck_grid(
      KC_ESC,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSPC,
      KC_TAB,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
     KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_MINS,
-    KC_LCTL, KC_LALT, KC_LGUI, KC_HYPR,    NUMS,  KC_SPC,     NAV,    SYMS,  KC_ENT, KC_MPLY, KC_VOLD, KC_VOLU
+    KC_LCTL, KC_LALT, KC_LGUI, KC_HYPR,    NUMS, NAV_SPC, KC_BSPC,    SYMS,  KC_ENT, KC_MPLY, KC_VOLD, KC_VOLU
 ),
 
 /* Numbers & Mouse emu.
