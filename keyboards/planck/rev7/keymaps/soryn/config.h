@@ -34,11 +34,3 @@
 #define ENABLE_RGB_MATRIX_TYPING_HEATMAP
 
 #define FORCE_NKRO
-
-//
-// Space doubles as NAV on hold. Permissive hold makes quick nav taps
-// (hold space, tap arrow, release) register as NAV, and a quick tap term of 0
-// disables space auto-repeat so tap-then-hold always reaches NAV.
-#define TAPPING_TERM 200
-#define PERMISSIVE_HOLD
-#define QUICK_TAP_TERM 0
